@@ -1,0 +1,9 @@
+.label-modal{width:min(1180px,96vw);max-width:96vw}.label-designer{display:grid;grid-template-columns:1fr 1fr;gap:24px}.label-designer .form-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.label-designer section{min-width:0}.label-toggles{display:flex;flex-wrap:wrap;gap:12px;margin:16px 0}.label-toggles label{display:flex;align-items:center;gap:6px}.label-toggles input{width:auto}.label-item{display:flex;align-items:center;gap:8px;padding:8px 0;border-bottom:1px solid #ddd}.label-item span{flex:1}.label-item input{width:80px}#labelItems{max-height:220px;overflow:auto}#labelMatches{display:flex;flex-direction:column;max-height:160px;overflow:auto}#labelPreview{background:#e9ecea;padding:24px;overflow:auto;border:1px dashed #bbb;min-height:180px}#labelPreview article{margin:auto;box-shadow:0 2px 8px #0001}#receiptFormat{width:auto}@media(max-width:800px){.label-designer{grid-template-columns:1fr}}
+.receipt-paper svg,.receipt-paper svg *{stroke:none!important}.receipt-verification svg path{fill:#111}.receipt-verification svg rect{fill:#fff}.receipt-verification b{overflow-wrap:anywhere}
+.admin-mode #generalModal.label-modal{width:min(1180px,96vw);max-width:96vw;max-height:94dvh;padding:0}
+.admin-mode #generalModal.label-modal #modalBody{padding:20px;overflow:auto;max-height:calc(94dvh - 86px)}
+.admin-mode #generalModal.label-modal .form-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.admin-mode #generalModal.label-modal .label-toggles label{display:flex;flex-direction:row;align-items:center;gap:6px;font-size:12px}
+.admin-mode #generalModal.label-modal .label-toggles input{width:16px;height:16px;min-height:0;padding:0}
+.admin-mode #generalModal.label-modal footer{position:sticky;bottom:-20px;background:white;padding:12px 0;margin:16px 0 0;border-top:1px solid #ddd;z-index:2}
+@media(max-width:800px){.admin-mode #generalModal.label-modal .label-designer{grid-template-columns:1fr}}

@@ -1,0 +1,442 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="theme-color" content="#142126" />
+    <meta name="application-name" content="KTS POS" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta
+      name="apple-mobile-web-app-status-bar-style"
+      content="black-translucent"
+    />
+    <meta name="apple-mobile-web-app-title" content="KTS POS" />
+    <title>KTS POS — جمعية المعلمين الكويتية</title>
+    <link rel="manifest" href="manifest.webmanifest" />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="192x192"
+      href="images/pwa/icon-192.png"
+    />
+    <link rel="apple-touch-icon" href="images/pwa/apple-touch-icon.png" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/admin.css" />
+    <link rel="stylesheet" href="css/pos.css" />
+  </head>
+  <body>
+    <section id="loginScreen" class="login-screen">
+      <div class="login-brand">
+        <span class="brand-mark">KTS</span>
+        <h1>جمعية المعلمين الكويتية</h1>
+        <p>نظام مبيعات وإدارة المكتبة والقرطاسية</p>
+        <div class="brand-line"></div>
+        <p>مساحة عمل واحدة للمبيعات والمخزون والإدارة المالية.</p>
+      </div>
+      <form id="loginForm" class="login-form">
+        <small>KTS / RETAIL OPERATIONS</small>
+        <h2>تسجيل الدخول</h2>
+        <p>أدخل بيانات حسابك لبدء العمل</p>
+        <label
+          >اسم المستخدم<input
+            name="username"
+            autocomplete="username"
+            required
+            autofocus /></label
+        ><label
+          >كلمة المرور<input
+            name="password"
+            type="password"
+            autocomplete="current-password"
+            required
+        /></label>
+        <div id="loginError" class="error" role="alert"></div>
+        <button class="primary" type="submit">دخول النظام</button>
+      </form>
+    </section>
+    <div id="appShell" hidden>
+      <header class="operations-bar">
+        <div class="brand">
+          <img id="brandLogo" src="images/logo.png" alt="" hidden /><span
+            id="brandFallback"
+            class="brand-mark"
+            >KTS</span
+          >
+          <div class="brand-copy">
+            <strong>جمعية المعلمين الكويتية</strong
+            ><small>نظام عمليات البيع بالتجزئة</small>
+          </div>
+        </div>
+        <nav aria-label="مساحات العمل">
+          <button data-view="pos" class="active">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M4 5h16v14H4zM4 9h16M8 14h3M16 13v3" /></svg
+            ><span>شاشة الكاشير</span></button
+          ><button data-view="returns">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M9 7H4v5M4 12a8 8 0 1 0 2-5M8 12h8M12 8l4 4-4 4" /></svg
+            ><span>المرتجعات</span></button
+          ><button data-view="admin" id="adminNav">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path
+                d="M4 4h6v6H4zM14 4h6v6h-6zM4 14h6v6H4zM14 14h6v6h-6z"
+              /></svg
+            ><span>الإدارة والمخزون</span>
+          </button>
+        </nav>
+        <div class="session-context">
+          <span class="operations-clock"
+            ><svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18M12 7v5l3 2" /></svg
+            ><span id="operationsClock">--:--</span></span
+          >
+          <button id="connectionStatus" class="presence">متصل</button>
+          <button id="shiftButton">لا توجد وردية</button>
+          <span class="cashier-context"
+            ><svg viewBox="0 0 24 24" aria-hidden="true">
+              <path
+                d="M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8M4 21a8 8 0 0 1 16 0"
+              /></svg
+            ><span id="cashierName"></span
+          ></span>
+          <button
+            id="customerDisplayButton"
+            class="shortcut-button customer-display-btn"
+            type="button"
+            title="فتح شاشة العميل (F7)"
+            aria-label="فتح شاشة العميل"
+          >
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M3 4h18v13H3z M8 21h8 M12 17v4" />
+            </svg>
+            <span>شاشة العميل</span><kbd>F7</kbd>
+          </button>
+          <button
+            id="helpButton"
+            class="shortcut-button"
+            title="دليل الاختصارات"
+          >
+            <span>الاختصارات</span><kbd>F1</kbd>
+          </button>
+          <button
+            id="installAppButton"
+            class="install-app-button"
+            title="تثبيت النظام على الجهاز"
+            aria-label="تثبيت النظام على الجهاز"
+            hidden
+          >
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M12 3v12M7 10l5 5 5-5M4 19h16" />
+            </svg>
+          </button>
+          <button
+            id="logoutButton"
+            class="logout-button"
+            aria-label="تسجيل الخروج"
+            title="تسجيل الخروج"
+          >
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M10 4H4v16h6M14 8l4 4-4 4M8 12h10" />
+            </svg>
+          </button>
+        </div>
+      </header>
+      <main id="posView" class="pos-layout">
+        <section class="catalog">
+          <div class="command-zone">
+            <div class="command-caption"><span>نقطة البيع</span><strong>كتالوج الأصناف</strong></div>
+            <div class="product-command">
+              <span class="command-icon"
+                ><svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path
+                    d="M10.5 18a7.5 7.5 0 1 1 0-15 7.5 7.5 0 0 1 0 15m5.5-2 5 5M3 4v4M6 4v4M9 4v4M13 4v4"
+                  /></svg
+              ></span>
+              <input
+                id="posSearchInput"
+                placeholder="امسح الباركود أو ابحث باسم الصنف أو رمزه"
+                autocomplete="off"
+                aria-label="البحث والباركود"
+              /><span class="command-hint"
+                ><svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path
+                    d="M3 5v14M6 5v14M10 5v14M13 5v14M17 5v14M21 5v14"
+                  /></svg
+                ><kbd>F2</kbd></span
+              >
+              <div id="searchResults" class="search-results" hidden></div>
+            </div>
+          </div>
+          <div class="transaction-heading" role="status" aria-live="polite">
+            <div>
+              <span class="transaction-indicator"></span>
+              <div>
+                <strong id="transactionGuideTitle">ابدأ بإضافة صنف</strong
+                ><small id="transactionGuideDetail"
+                  >امسح الباركود أو ابحث بالاسم</small
+                >
+              </div>
+            </div>
+            <div class="transaction-heading-action">
+              <kbd id="transactionGuideShortcut">F2</kbd
+              ><svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M6 3h12v18H6zM9 7h6M9 11h6M9 15h3" />
+              </svg>
+              <a class="pos-order-jump" href="#posCurrentOrder">عرض الطلب</a>
+            </div>
+            <div class="transaction-progress" aria-label="مسار البيع">
+              <span data-step="product" aria-label="إضافة الأصناف"></span
+              ><span data-step="review" aria-label="مراجعة السلة"></span
+              ><span data-step="payment" aria-label="التحصيل"></span>
+            </div>
+          </div>
+          <div id="categoryRail" class="category-rail"></div>
+          <div class="cashier-quick-tools" aria-label="أدوات الكاشير السريعة">
+            <button id="favoritesFilter" aria-pressed="false">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 2.8 5.7 6.2.9-4.5 4.4 1.1 6.2-5.6-3-5.6 3 1.1-6.2L3 9.6l6.2-.9L12 3z" /></svg>
+              المفضلة
+            </button>
+            <button id="repeatLastProduct">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h11a5 5 0 0 1 0 10H8M4 7l4-4M4 7l4 4" /></svg>
+              آخر صنف
+            </button>
+            <button id="quantityKeypad">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 3h14v18H5zM8 7h.01M12 7h.01M16 7h.01M8 11h.01M12 11h.01M16 11h.01M8 15h.01M12 15h.01M16 15h.01" /></svg>
+              الكمية
+            </button>
+            <button id="lastReceiptButton">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 2l3 2 4-2 4 2 3-2v20l-3-2-4 2-4-2-3 2V2zM8 8h8M8 12h8" /></svg>
+              آخر فاتورة
+            </button>
+          </div>
+          <div class="catalog-context">
+            <div>
+              <strong id="catalogTitle">جميع الأصناف</strong
+              ><small id="catalogCount">0 صنف</small>
+            </div>
+            <div>
+              <button id="catalogToggle">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M4 6h16M4 12h16M4 18h10" /></svg
+                >عرض السلة <kbd>F3</kbd></button
+              ><button id="catalogPrev" hidden aria-label="الصفحة السابقة">
+                السابق</button
+              ><button id="catalogNext" hidden aria-label="الصفحة التالية">
+                التالي</button
+              ><select id="catalogSort" aria-label="ترتيب الأصناف">
+                <option value="name">الاسم</option>
+                <option value="price">السعر</option>
+                <option value="stock">المخزون</option>
+              </select>
+            </div>
+          </div>
+          <div id="productWorkspace" class="product-workspace">
+            <div id="productGrid" class="product-grid"></div>
+            <div id="cartTableWorkspace" hidden></div>
+          </div>
+        </section>
+        <aside class="transaction-rail">
+          <section class="cart-section" id="posCurrentOrder">
+            <div class="section-title">
+              <strong
+                ><svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M3 4h2l2 11h10l3-8H6M9 20h.01M17 20h.01" /></svg
+                ><span>الطلب الحالي</span>
+                <small id="cartCount">0 قطع</small></strong
+              >
+              <div>
+                <button id="holdButton" title="تعليق السلة">
+                  تعليق <kbd>F4</kbd></button
+                ><button id="heldButton" title="السلات المعلقة">
+                  المعلّقة <kbd>F9</kbd>
+                </button>
+              </div>
+            </div>
+            <div id="cartItems" class="cart-items"></div>
+          </section>
+          <section class="member-context">
+            <div class="section-title">
+              <strong
+                ><svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path
+                    d="M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8M4 21a8 8 0 0 1 16 0"
+                  /></svg
+                ><span>عضوية العميل</span></strong
+              ><button id="clearMember" hidden>إزالة</button>
+            </div>
+            <form id="memberForm" class="inline">
+              <input
+                id="memberSearchInput"
+                aria-label="رقم العضوية أو الرقم المدني أو الهاتف"
+                placeholder="رقم العضوية / المدني / الهاتف"
+              /><kbd>F8</kbd><button type="submit">تحقق</button>
+            </form>
+            <div id="member-profile-card" hidden></div>
+            <button
+              id="active-discount-display-card"
+              class="discount-row"
+              hidden
+            ></button>
+          </section>
+          <section class="payment-section">
+            <div class="payment-heading">
+              <strong>طريقة الدفع</strong><small>اختر وسيلة التحصيل</small>
+            </div>
+            <div id="paymentSelector" class="segmented">
+              <button data-payment="cash" class="selected">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path
+                    d="M3 6h18v12H3zM7 10h.01M17 14h.01M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6"
+                  /></svg
+                ><span>نقدًا</span></button
+              ><button data-payment="knet">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M3 6h18v12H3zM3 10h18M7 15h3" /></svg
+                ><span>K-Net</span></button
+              ><button data-payment="split">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path
+                    d="M8 4H4v4M4 4l6 6M16 20h4v-4M20 20l-6-6M16 4h4v4M20 4l-6 6M8 20H4v-4M4 20l6-6"
+                  /></svg
+                ><span>تقسيم</span>
+              </button>
+            </div>
+            <div id="cashPaymentBox">
+              <label
+                >المبلغ المستلم<input
+                  id="paidAmount"
+                  type="number"
+                  min="0"
+                  step="0.001"
+                  placeholder="0.000" /></label
+              ><small id="changeDue"></small>
+            </div>
+            <div id="knetPaymentBox" hidden>
+              <label
+                >رقم مرجع كي نت<input id="knetReference" dir="ltr"
+              /></label>
+            </div>
+            <div id="split-payment-inline-box" hidden>
+              <div class="split-fields">
+                <label
+                  >نقدًا<input
+                    id="splitCash"
+                    type="number"
+                    min="0"
+                    step="0.001" /></label
+                ><label
+                  >K-Net<input
+                    id="splitKnet"
+                    type="number"
+                    min="0"
+                    step="0.001"
+                /></label>
+              </div>
+              <div class="section-title">
+                <button id="equalSplit">توزيع بالتساوي</button
+                ><small id="splitStatus"></small>
+              </div>
+            </div>
+          </section>
+          <section class="transaction-summary">
+            <div><span>المجموع</span><b id="subtotal">0.000 د.ك</b></div>
+            <div><span>الخصم</span><b id="discountTotal">−0.000 د.ك</b></div>
+            <div class="net-total">
+              <span>المبلغ المطلوب</span
+              ><strong id="netTotal">0.000 د.ك</strong>
+            </div>
+            <button id="checkoutButton" class="checkout primary" disabled>
+              <span
+                ><svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="m5 12 4 4L19 6M4 21h16" /></svg
+                >إتمام البيع وطباعة الفاتورة</span
+              ><kbd>F10</kbd>
+            </button>
+          </section>
+        </aside>
+      </main>
+      <main id="returnsView" class="management-view" hidden>
+        <div class="page-heading">
+          <div>
+            <small>عمليات البيع</small>
+            <h1>المرتجعات</h1>
+            <p>استرجاع الأصناف وفق الفاتورة الأصلية والكميات المتبقية</p>
+          </div>
+        </div>
+        <form id="verifyInvoiceForm" class="inline search-line">
+          <input
+            name="invoice_no"
+            required
+            placeholder="رقم الفاتورة INV-YYYYMMDD-XXXX"
+            dir="ltr"
+          /><button class="primary">التحقق من الفاتورة</button>
+        </form>
+        <div id="returnContent" class="empty-state">
+          أدخل رقم الفاتورة لعرض الأصناف القابلة للإرجاع
+        </div>
+      </main>
+      <main id="adminView" class="admin-layout" hidden>
+        <aside id="adminSidebar" class="admin-sidebar"></aside>
+        <section class="admin-content">
+          <div id="adminHeading" class="page-heading"></div>
+          <div id="adminToolbar" class="admin-toolbar"></div>
+          <div id="adminContent"></div>
+        </section>
+      </main>
+    </div>
+    <dialog id="memberDiscountModal">
+      <div class="modal-heading">
+        <div>
+          <h2>خيارات الخصم</h2>
+          <p id="discountMemberName"></p>
+        </div>
+        <button data-close aria-label="إغلاق">×</button>
+      </div>
+      <form id="discountForm">
+        <div id="discountOptions"></div>
+        <footer>
+          <button type="button" data-close>إلغاء</button
+          ><button class="primary" type="submit">اعتماد الخصم</button>
+        </footer>
+      </form>
+    </dialog>
+    <dialog id="generalModal">
+      <div class="modal-heading">
+        <h2 id="modalTitle"></h2>
+        <button data-close aria-label="إغلاق">×</button>
+      </div>
+      <div id="modalBody"></div>
+    </dialog>
+    <dialog id="receiptModal">
+      <div class="modal-heading">
+        <h2>معاينة الفاتورة</h2>
+        <button data-close aria-label="إغلاق">×</button>
+      </div>
+      <div id="receiptPaper" class="receipt-paper"></div>
+      <footer>
+        <button data-close>إغلاق</button
+        ><button id="printReceipt" class="primary">طباعة الفاتورة</button>
+      </footer>
+    </dialog>
+    <div id="toast" class="toast" role="status" hidden></div>
+    <script src="js/offlineDb.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/pwa.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/pos.js"></script>
+    <script src="js/pos-design.js"></script>
+    <script src="js/pos-enhancements.js"></script>
+    <script src="js/admin.js"></script>
+    <script src="js/admin-design.js"></script>
+    <script src="js/operations.js"></script>
+    <link rel="stylesheet" href="css/printing.css">
+    <script src="js/printing.js"></script>
+    <script src="js/labels.js"></script>
+    <link rel="stylesheet" href="css/permissions.css">
+    <script src="js/user-permissions.js"></script>
+    <link rel="stylesheet" href="css/customer-display-admin.css">
+    <script src="js/customer-display-bridge.js"></script>
+    <script src="js/customer-display-admin.js"></script>
+  </body>
+</html>

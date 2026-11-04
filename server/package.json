@@ -1,0 +1,8 @@
+{
+  "name": "kts-pos-server",
+  "private": true,
+  "type": "commonjs",
+  "scripts": {
+    "start": "node src/server.js"
+  }
+}

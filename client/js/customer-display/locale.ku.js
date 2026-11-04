@@ -1,0 +1,22 @@
+/* All customer-facing copy lives here; configured campaign copy comes from administration. */
+(function(root){root.CustomerLocale={
+ locale:'ar-KW',brand:'جمعية المعلمين الكويتية',store:'مكتبة القرطاسية',signature:'للدراسة. للأفكار. لكل يوم.',
+ welcome:['هلا والله. شنو ناقصك اليوم؟','مدرسة، جامعة ولا مكتب؟ خلّنا نجهزك.','كل اللي تحتاجه… بمكان واحد.'],
+ school:['جاهزين للسنة اليديدة؟','رجعنا للدراسة. خلّنا نكمل عدّتك.','دفاتر يديدة، وأفكار أحلى.'],
+ welcomeDetail:'من أول فكرة… لي آخر صفحة. نجهّز معاك كل التفاصيل.',
+ campaign:{everyday:'تفاصيل تصنع يومك',school:'جاهزين للدراسة',custom:'اختيارات هالموسم'},
+ shopping:'يلا نجهز أغراضك.',shoppingDetail:'أغراضك جدامك، خطوة بخطوة.',
+ micro:{notebook:['صفحة يديدة، وأفكار أحلى.','جاهزين للدراسة.'],pen:['اختيار مرتب.','قلمك حاضر.'],art:['خلّ الأفكار تاخذ ألوانها.','هذي شكلها بتفيدك وايد.'],bag:['خلّنا نكمل التجهيز.','عدّتك قاعدة تكمل.'],generic:['هذي دخلت السلة.','تمام… نكمل.','اختيار مرتب.'],many:['العدّة قاعدة تكمل.','ما بقى إلا اللمسات الأخيرة.'],school:['تجهيز مرتب للسنة اليديدة.']},
+ suggestions:{pen:'ناقصه قلم؟',art:'ألوانك كاملة؟',school:'خلّنا نكمل التجهيز.',related:'يمكن تحتاج هذي بعد.'},
+ suggestionNote:'إذا تبيها، قول للكاشير. نضيفها باختيارك.',
+ orderTitle:'أغراضك المختارة',emptyOrder:'سلتك ناطرتك.',items:count=>`${count} ${count===1?'قطعة':'قطع'} باختيارك`,
+ subtotal:'المجموع',discount:'خصمك',total:'الإجمالي',unit:'للقطعة',quantity:'الكمية',currency:'د.ك',
+ rewardLead:'لحظة… عندك شي حلو.',rewardTitle:'خصمك حاضر.',saved:'وفّرنا لك',savedDetail:'توفيرك اليوم',savingPercent:'نسبة التوفير',before:'قبل الخصم',after:'بعد الخصم',
+ memberWelcome:'يا هلا برجعتك.',memberDetail:'خصمك ومزاياك معاك.',vouchers:n=>`${n} قسائم متاحة`,
+ payment:'تمام عليك.',paymentDetail:'ثواني ونخلصها.',amountDue:'المبلغ المطلوب',payments:{cash:'الدفع نقدًا',knet:'الدفع بكي نت',split:'الدفع نقدًا وكي نت'},
+ success:'تمّت.',successLead:'يعطيك العافية.',successDetail:'يعطيك العافية، وتتهنّى بأغراضك.',successSchool:'بالتوفيق بالدراسة… ونشوفك على خير.',receipt:'فاتورتك معاك',receiptDetail:'امسح الرمز، وخلك محتفظ بفاتورتك.',
+ offline:'ثواني ونرجع نكمل.',offlineDetail:'أغراضك محفوظة، والكاشير بيكمل معاك.',cancelled:'ولا يهمك. نبدأ على راحتك.',failed:'نراجعها معاك، وثواني ونكمل.',
+ pairing:'هلا والله. نجهّز لك الشاشة.',pairingDetail:'افتح «شاشة العميل» من جهاز الكاشير واربط هالشاشة بالرابط الخاص فيه.',
+ local:'نكمل معاك من جهاز الكاشير.',online:'معاك أول بأول',fullscreen:'عرض بملء الشاشة',exitFullscreen:'الخروج من ملء الشاشة',
+ training:'تجربة تدريبية',trainingDetail:'هذي تجربة عرض، مو فاتورة شراء.',awaiting:'سلتك ناطرتك',newIdeas:'خلّ أفكارك تكبر.',
+};})(typeof window!=='undefined'?window:globalThis);

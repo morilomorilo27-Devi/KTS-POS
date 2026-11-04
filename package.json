@@ -1,0 +1,24 @@
+{
+  "name": "kts-pos",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node server/src/server.js",
+    "test": "node --test server/test/*.test.js"
+  },
+  "engines": {
+    "node": ">=22.19"
+  },
+  "dependencies": {
+    "compression": "^1.8.2",
+    "cors": "^2.8.5",
+    "exceljs": "^4.4.0",
+    "express": "^5.1.0",
+    "multer": "^2.0.2"
+  },
+  "overrides": {
+    "exceljs": {
+      "uuid": "^11.1.1"
+    }
+  }
+}

@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+ <head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#f5f2eb"><title>شاشة العميل — KTS</title><link rel="icon" href="images/logo.png"><link rel="stylesheet" href="css/customer-display.css"></head>
+ <body data-mode="idle" data-theme="sage">
+  <div class="display-shell">
+   <header class="display-header"><div class="display-brand"><img id="displayLogo" src="images/logo.png" alt=""><div><strong data-text="brand"></strong><span data-text="store"></span></div></div><div class="display-signature" data-text="signature"></div><div class="display-utilities"><span id="displayPresence"><i></i><span data-text="online"></span></span><button id="displayFullscreen" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 3H3v5m13-5h5v5M3 16v5h5m13-5v5h-5"/></svg></button></div></header>
+   <main class="display-layout">
+    <section class="experience-hero">
+     <div class="hero-copy"><span class="hero-eyebrow" id="campaignCaption"></span><h1 id="experienceTitle"></h1><p id="experienceDetail"></p><div id="memberMoment" class="member-moment" hidden></div></div>
+     <div class="product-stage" id="productStage" aria-hidden="true">
+      <div class="stage-surface"></div><div class="stage-orbit"></div><div class="stage-caption"><span>KTS</span><i></i></div>
+      <div class="idle-objects" id="idleObjects"><div class="idle-notebook"></div><div class="idle-pen"></div><div class="idle-ruler"></div><div class="idle-colours"></div></div>
+      <div class="basket-scene"><div class="basket-shadow"></div><div class="basket-3d" id="basket3d"><div class="basket-face basket-back"></div><div class="basket-face basket-left"></div><div class="basket-floor"></div><div class="basket-contents" id="basketContents"></div><div class="basket-face basket-right"></div><div class="basket-face basket-front"><div class="basket-emblem">KTS</div></div><div class="basket-rim"></div><div class="basket-handle back-handle"></div><div class="basket-handle front-handle"></div></div></div>
+      <div class="large-products" id="largeProducts"></div><div id="flyingProducts"></div><div id="featuredSpotlight" class="featured-spotlight" hidden></div>
+     </div>
+     <div class="hero-bottom"><div class="microcopy" id="contextMicrocopy"></div><span class="pieces-label" id="piecesLabel"></span></div>
+    </section>
+    <aside class="order-panel" id="orderPanel"><div class="order-heading"><span class="panel-index">01 /</span><h2 data-text="orderTitle"></h2><span id="orderCount"></span></div><div class="order-lines" id="orderLines" aria-live="off"></div><div id="relatedProduct" class="related-product" hidden></div><div class="order-totals"><div><span data-text="subtotal"></span><b id="displaySubtotal"></b></div><div id="discountLine"><span data-text="discount"></span><b id="displayDiscount"></b></div><div class="grand-total"><span data-text="total"></span><strong id="displayTotal"></strong></div></div><div class="order-footer"><i></i><span data-text="shoppingDetail"></span></div></aside>
+   </main>
+   <div class="reward-moment" id="rewardMoment" hidden><div class="reward-inner"><span data-text="rewardLead"></span><h2 data-text="rewardTitle"></h2><span class="saving-label" data-text="saved"></span><strong id="rewardSaving"></strong><div class="reward-comparison"><div><small data-text="before"></small><b id="rewardBefore"></b></div><i></i><div><small data-text="after"></small><b id="rewardAfter"></b></div></div></div></div>
+   <section class="completion-panel" id="completionPanel" hidden><div class="completion-symbol"><svg viewBox="0 0 48 48" aria-hidden="true"><path d="m12 25 8 8 17-19"/></svg></div><span id="completionEyebrow"></span><h2 id="completionTitle"></h2><p id="completionDetail"></p><strong id="completionAmount"></strong><div id="customerReceipt" hidden></div></section>
+   <div class="offline-panel" id="offlinePanel" hidden><span class="offline-orbit"></span><h2 data-text="offline"></h2><p data-text="offlineDetail"></p></div>
+   <div class="pairing-panel" id="pairingPanel" hidden><img src="images/logo.png" alt=""><h1 data-text="pairing"></h1><p data-text="pairingDetail"></p></div>
+   <footer class="display-footer"><span data-text="signature"></span><span id="trainingNotice" data-text="training" hidden></span><span id="displayClock"></span></footer>
+   <p class="sr-only" id="displayAnnouncement" role="status" aria-live="polite"></p>
+  </div>
+  <script src="js/customer-display/locale.ku.js"></script><script src="js/customer-display/state.js"></script><script src="js/customer-display/objects.js"></script><script src="js/customer-display/experience.js"></script>
+ </body>
+</html>
