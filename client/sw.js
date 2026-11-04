@@ -1,4 +1,4 @@
-const CACHE = "kts-pos-shell-v15";
+const CACHE = "kts-pos-shell-v16";
 const FILES = [
   "/",
   "/index.html",

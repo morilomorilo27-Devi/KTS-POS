@@ -24,8 +24,26 @@
     <link rel="stylesheet" href="css/style.css" />
     <link rel="stylesheet" href="css/admin.css" />
     <link rel="stylesheet" href="css/pos.css" />
+    <link rel="stylesheet" href="css/printing.css" />
+    <link rel="stylesheet" href="css/permissions.css" />
+    <link rel="stylesheet" href="css/customer-display-admin.css" />
+    <style>
+      #sessionLoading { display: none; }
+      .restoring-session #loginScreen { display: none; }
+      .restoring-session #sessionLoading {
+        display: grid; min-height: 100dvh; place-content: center;
+        color: #142342; background: #eaf0f8; font-weight: 700;
+      }
+    </style>
+    <script>
+      try {
+        if (localStorage.getItem("kts_token"))
+          document.documentElement.classList.add("restoring-session");
+      } catch {}
+    </script>
   </head>
   <body>
+    <div id="sessionLoading" role="status">جارٍ تحميل مساحة العمل…</div>
     <section id="loginScreen" class="login-screen">
       <div class="login-brand">
         <span class="brand-mark">KTS</span>
@@ -142,7 +160,7 @@
           </button>
         </div>
       </header>
-      <main id="posView" class="pos-layout">
+      <main id="posView" class="pos-layout" hidden>
         <section class="catalog">
           <div class="command-zone">
             <div class="command-caption"><span>نقطة البيع</span><strong>كتالوج الأصناف</strong></div>
@@ -430,12 +448,9 @@
     <script src="js/admin.js"></script>
     <script src="js/admin-design.js"></script>
     <script src="js/operations.js"></script>
-    <link rel="stylesheet" href="css/printing.css">
     <script src="js/printing.js"></script>
     <script src="js/labels.js"></script>
-    <link rel="stylesheet" href="css/permissions.css">
     <script src="js/user-permissions.js"></script>
-    <link rel="stylesheet" href="css/customer-display-admin.css">
     <script src="js/customer-display-bridge.js"></script>
     <script src="js/customer-display-admin.js"></script>
   </body>

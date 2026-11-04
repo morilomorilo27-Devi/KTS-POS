@@ -54,8 +54,6 @@ window.Auth = {
     this.user = user;
     await Offline.set("user", user);
     UI.$("cashierName").textContent = user.full_name;
-    UI.$("appShell").hidden = false;
-    UI.$("loginScreen").hidden = true;
     UI.$("adminNav").hidden =
       !Admin.sections.some(section=>this.can(section[2]));
     for(const button of document.querySelectorAll('[data-view="pos"]')) button.hidden=!this.can("pos_sale");
@@ -73,6 +71,8 @@ window.Auth = {
     };
     if (logo.complete && logo.naturalWidth) logo.onload();
     this.view(this.can("pos_sale") ? "pos" : !UI.$("adminNav").hidden ? "admin" : this.can("pos_return") ? "returns" : "restricted");
+    UI.$("loginScreen").hidden = true;
+    UI.$("appShell").hidden = false;
     if(this.can("pos_sale"))UI.$("posSearchInput").focus();
   },
   async refreshShift(offline = false) {
@@ -175,5 +175,7 @@ window.Auth = {
   },
 };
 window.addEventListener("DOMContentLoaded", () =>
-  Auth.init().catch((e) => UI.toast(e.message, true)),
+  Auth.init()
+    .catch((e) => UI.toast(e.message, true))
+    .finally(() => document.documentElement.classList.remove("restoring-session")),
 );

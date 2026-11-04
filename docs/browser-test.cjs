@@ -96,6 +96,26 @@ let browser, server;
   await page.screenshot({
     path: path.join(__dirname, "test-output/pos-empty-1366.png"),
   });
+  // Slow catalog requests must never reveal the POS before its mode styles apply.
+  let releaseSnapshot;
+  const snapshotHeld = new Promise((resolve) => { releaseSnapshot = resolve; });
+  await page.route("**/api/sync/snapshot", async (route) => {
+    await snapshotHeld;
+    await route.continue();
+  }, { times: 1 });
+  try {
+    await Promise.all([
+      page.waitForRequest("**/api/sync/snapshot", { timeout: 5000 }),
+      page.reload({ waitUntil: "domcontentloaded" }),
+    ]);
+    assert.equal(await page.locator("#appShell").isVisible(), false);
+    assert.equal(await page.locator("#loginScreen").isVisible(), false);
+    assert.equal(await page.locator("#sessionLoading").isVisible(), true);
+  } finally {
+    releaseSnapshot();
+  }
+  await page.locator("body.pos-mode #appShell").waitFor({ state: "visible" });
+  await page.locator("#sessionLoading").waitFor({ state: "hidden" });
   await page.locator("[data-view=admin]").click();
   await page.locator(".dashboard-metrics").waitFor();
   assert.equal(await page.locator(".chart-empty").count(), 1);
